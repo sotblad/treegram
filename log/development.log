@@ -1,0 +1,528 @@
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "photos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "caption" varchar, "created_at" datetime, "updated_at" datetime, "image_file_name" varchar, "image_content_type" varchar, "image_file_size" integer, "image_updated_at" datetime) [0m
+  [1m[35m (2.2ms)[0m  CREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "photo_id" integer) 
+  [1m[36m (2.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password_hash" varchar, "password_salt" varchar, "created_at" datetime, "updated_at" datetime, "avatar_file_name" varchar, "avatar_content_type" varchar, "avatar_file_size" integer, "avatar_updated_at" datetime) [0m
+  [1m[35m (2.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (2.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150319191254')
+  [1m[36m (1.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150318211456')[0m
+  [1m[35m (2.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150318205231')
+  [1m[36m (1.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150318163919')[0m
+  [1m[35m (1.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20150318213656')
+  [1m[36m (1.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20150319191128')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.5ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for ::1 at 2022-11-15 19:16:33 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (347.2ms)
+Completed 200 OK in 429ms (Views: 423.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2022-11-15 19:34:36 +0200
+Processing by UsersController#new as HTML
+  Rendered users/new.html.haml within layouts/application (42.6ms)
+Completed 200 OK in 65ms (Views: 64.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/users" for ::1 at 2022-11-15 19:37:16 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"J/NAn7Q/8+G2WadgliwYpdSsDC10rjo0H873P3z+1Ux2XP96WDudC2AqREkhHf0/B0uS35yS/PdPSHMyiJGoQg==", "user"=>{"email"=>"test@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "avatar"=>#<ActionDispatch::Http::UploadedFile:0x00007f80cce780c0 @tempfile=#<Tempfile:/tmp/RackMultipart20221115-1544-wq1s33.jpg>, @original_filename="background.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"user[avatar]\"; filename=\"background.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Sign Up"}
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-h1ijoa.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]' -auto-orient -resize "300x300>" '/tmp/ef5617dbfe0928904166eba3ba272ec220221115-1544-kpkn2z'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-b02sg4.jpg[0]' -auto-orient -resize "100x100>" '/tmp/ef5617dbfe0928904166eba3ba272ec220221115-1544-1kexb6m'
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1fzg8xf.jpg'
+  [1m[35mUser Exists (0.8ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@test.com' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1gnlqhw.jpg'
+  [1m[35mCACHE (0.0ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'test@test.com' LIMIT 1
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "users" ("email", "avatar_file_name", "avatar_content_type", "avatar_file_size", "avatar_updated_at", "password_salt", "password_hash", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "test@test.com"], ["avatar_file_name", "background.jpg"], ["avatar_content_type", "image/jpeg"], ["avatar_file_size", 49151], ["avatar_updated_at", "2022-11-15 17:37:16.827164"], ["password_salt", "$2a$10$Pmcl1acfe11z1MMaamsGPe"], ["password_hash", "$2a$10$Pmcl1acfe11z1MMaamsGPeysRwIf0uKJNLCKYllKlhC2DDaH.JIUW"], ["created_at", "2022-11-15 17:37:17.030162"], ["updated_at", "2022-11-15 17:37:17.030162"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 237ms (ActiveRecord: 3.8ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:37:17 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.2ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  Rendered users/show.html.haml within layouts/application (23.0ms)
+Completed 200 OK in 51ms (Views: 34.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/1/photos/new" for ::1 at 2022-11-15 19:41:49 +0200
+Processing by PhotosController#new as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2022-11-15 17:41:49.097455"], ["updated_at", "2022-11-15 17:41:49.097455"]]
+  [1m[35m (9.8ms)[0m  commit transaction
+  Rendered photos/new.html.haml within layouts/application (1.8ms)
+Completed 200 OK in 25ms (Views: 9.4ms | ActiveRecord: 10.2ms)
+
+
+Started POST "/users/1/photos" for ::1 at 2022-11-15 19:41:53 +0200
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ng2YXAfmU7NYOirjXtlBDxKYgbkLUWZWNfENIMsjROJnoie56+I9WY5Jycrp6KSVwX8fS+NtoJVld4ktP0w57A==", "photo"=>{"image"=>#<ActionDispatch::Http::UploadedFile:0x00007f80c8718810 @tempfile=#<Tempfile:/tmp/RackMultipart20221115-1544-1231rpc.jpg>, @original_filename="background.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"background.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Upload", "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1ger5gv.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]' -auto-orient -resize "300x300>" '/tmp/880b32aad2daff1c3b3276e3dad6747020221115-1544-fzikb'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-57lh2u.jpg[0]' -auto-orient -resize "100x100>" '/tmp/880b32aad2daff1c3b3276e3dad6747020221115-1544-1u4lhgj'
+  [1m[35m (0.1ms)[0m  begin transaction
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-8typkq.jpg'
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["image_file_name", "background.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 49151], ["image_updated_at", "2022-11-15 17:41:53.845712"], ["created_at", "2022-11-15 17:41:53.912142"], ["updated_at", "2022-11-15 17:41:53.912142"]]
+  [1m[35m (9.6ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "photos" SET "user_id" = ?, "updated_at" = ? WHERE "photos"."id" = ?  [["user_id", 1], ["updated_at", "2022-11-15 17:41:53.958633"], ["id", 2]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 117ms (ActiveRecord: 11.4ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:41:53 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?[0m  [["photo_id", 2]]
+  Rendered users/show.html.haml within layouts/application (21.1ms)
+Completed 200 OK in 28ms (Views: 25.7ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:42:44 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E3mLfvB85Fdd5pHc0OXgu8sEoTbaMSf/5v+GxaB7H9BC1jSbHHiKvYuVcvVn1AUhGOM/xDIN4Ty2eQLIVBRi3g==", "tag"=>{"photo_id"=>"2", "user_id"=>"1"}, "commit"=>"Tag User"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)  [["user_id", 1], ["photo_id", 2]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 6ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:42:44 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mTag Load (0.0ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?[0m  [["photo_id", 2]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (5.8ms)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:42:45 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qmCTt8g7L70jeCQ3R4NbuktWJGwGxHpxq6t4ooNW7Wn7zyxSJD9BV/ULxx7wsr4gmLG6nu74vLL7LfyvdzmQZw==", "tag"=>{"photo_id"=>"2", "user_id"=>"1"}, "commit"=>"Tag User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)[0m  [["user_id", 1], ["photo_id", 2]]
+  [1m[35m (2.3ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 4ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:42:45 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 2]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:42:46 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NEOVhdcsr+ZJtkNW+bB6yxhP2yOgcdkeJIAxDrEPnZtl7CpgOyjBDJ/FoH9OgZ9Ry6hF0UhNH910BrUDRWDglQ==", "tag"=>{"photo_id"=>"2", "user_id"=>"1"}, "commit"=>"Tag User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)[0m  [["user_id", 1], ["photo_id", 2]]
+  [1m[35m (2.3ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 4ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:42:46 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 2]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/2" for ::1 at 2022-11-15 19:42:52 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms)
+
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=2):
+  app/controllers/users_controller.rb:26:in `show'
+
+
+  Rendered /usr/local/rvm/gems/ruby-2.5.1/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /usr/local/rvm/gems/ruby-2.5.1/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /usr/local/rvm/gems/ruby-2.5.1/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.5ms)
+  Rendered /usr/local/rvm/gems/ruby-2.5.1/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (14.4ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:42:56 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 2]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (2.9ms)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:43:11 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tr/sUp6C323Yc0CqSMHdeGNezfRaVBdxVHsJczvOUJTnEFO3coaxhw4Ao4P/8DjisLlTBrJo0bIE/Y1+z6Etmg==", "tag"=>{"photo_id"=>"2", "user_id"=>"1"}, "commit"=>"Tag User"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)  [["user_id", 1], ["photo_id", 2]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 3ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:43:11 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mPhoto Load (0.1ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?[0m  [["photo_id", 2]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 9ms (Views: 8.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/log-out" for ::1 at 2022-11-15 19:43:18 +0200
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3001/
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2022-11-15 19:43:18 +0200
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (0.7ms)
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/log-in" for ::1 at 2022-11-15 19:43:20 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.haml within layouts/application (2.2ms)
+Completed 200 OK in 16ms (Views: 16.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/log-in" for ::1 at 2022-11-15 19:43:21 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5XdlfLFX4mJfV8uJeSPwhd2w/L2di3n0xEmXPT3wF8u02NqZXVOMiIkkKKDOEhUfDldiT3W3vzeUzxMwyZ9qxQ==", "email"=>"test@test.com", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "test@test.com"]]
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 50ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 19:43:22 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 2]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (5.3ms)
+Completed 200 OK in 10ms (Views: 9.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/log-out" for ::1 at 2022-11-15 19:46:55 +0200
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3001/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2022-11-15 19:46:56 +0200
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2022-11-15 19:46:57 +0200
+Processing by UsersController#new as HTML
+  Rendered users/new.html.haml within layouts/application (2.0ms)
+Completed 200 OK in 7ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2022-11-15 19:47:01 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E7rgKS/V6yZN15KKmq2X2RKQi7hUKLZYnG93pmSKHwdCFV/Mw9GFzJukcaMtnHJDwXcVSrwUcJvM6fOrkOViCQ==", "user"=>{"email"=>"test<i>@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'test<i>@test.com' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'test<i>@test.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("email", "password_salt", "password_hash", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["email", "test<i>@test.com"], ["password_salt", "$2a$10$.WbOoJ3Dqt3fCFcwJnwk3e"], ["password_hash", "$2a$10$.WbOoJ3Dqt3fCFcwJnwk3eRrBR5q/BUZPZJ0JDILcqfBcGqHdYCjy"], ["created_at", "2022-11-15 17:47:01.825333"], ["updated_at", "2022-11-15 17:47:01.825333"]]
+  [1m[36m (1.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/2
+Completed 302 Found in 53ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/users/2" for ::1 at 2022-11-15 19:47:01 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mPhoto Load (0.0ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 2]]
+  Rendered users/show.html.haml within layouts/application (0.7ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/log-out" for ::1 at 2022-11-15 19:47:04 +0200
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3001/
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2022-11-15 19:47:04 +0200
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/log-in" for ::1 at 2022-11-15 19:47:05 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2022-11-15 19:47:06 +0200
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 11ms (Views: 10.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2022-11-15 19:47:06 +0200
+Processing by UsersController#new as HTML
+  Rendered users/new.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 6ms (Views: 5.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2022-11-15 19:47:13 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"b+LAJXpB6pVZXDZAZ3e1yoMwPLkoQENyis3/gGtMeZU+TX/AlkWEf48v1WnQRlBQUNeiS8B8hbHaS3uNnyMEmw==", "user"=>{"email"=>"\"><i>atest@test.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = '"><i>atest@test.com' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = '"><i>atest@test.com' LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "users" ("email", "password_salt", "password_hash", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "\"><i>atest@test.com"], ["password_salt", "$2a$10$arWstT.50APY3TmF1/3M/e"], ["password_hash", "$2a$10$arWstT.50APY3TmF1/3M/eTWp1daVQI9f.ok2b/hPH3ELX/eYOx0C"], ["created_at", "2022-11-15 17:47:13.857594"], ["updated_at", "2022-11-15 17:47:13.857594"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/3
+Completed 302 Found in 54ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/users/3" for ::1 at 2022-11-15 19:47:13 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 3]]
+  Rendered users/show.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 6ms (Views: 5.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/users/3/photos/new" for ::1 at 2022-11-15 19:47:15 +0200
+Processing by PhotosController#new as HTML
+  Parameters: {"user_id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2022-11-15 17:47:15.840355"], ["updated_at", "2022-11-15 17:47:15.840355"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+  Rendered photos/new.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 9ms (Views: 4.9ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/users/3/photos" for ::1 at 2022-11-15 19:47:18 +0200
+Processing by PhotosController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zmrfofv3cJ4sSQtBetjsmlrijKjcoyglbfn9hjL77a6fxWBEF/MedPo66GjN6QkAiQUSWjSf7uY9f3mLxpSQoA==", "photo"=>{"image"=>#<ActionDispatch::Http::UploadedFile:0x00007f80cdb388f0 @tempfile=#<Tempfile:/tmp/RackMultipart20221115-1544-13r55jz.jpg>, @original_filename="background.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"photo[image]\"; filename=\"background.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Upload", "user_id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-16alp6n.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]' -auto-orient -resize "300x300>" '/tmp/062263dbf097c7852636013c908a8efe20221115-1544-upy5ii'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]'
+Command :: convert '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-1bjz32s.jpg[0]' -auto-orient -resize "100x100>" '/tmp/062263dbf097c7852636013c908a8efe20221115-1544-dhlfbk'
+  [1m[35m (0.0ms)[0m  begin transaction
+Command :: file -b --mime '/tmp/d229bbf31eaeebc7c88897732d8b932d20221115-1544-xjsyv5.jpg'
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "photos" ("image_file_name", "image_content_type", "image_file_size", "image_updated_at", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["image_file_name", "background.jpg"], ["image_content_type", "image/jpeg"], ["image_file_size", 49151], ["image_updated_at", "2022-11-15 17:47:18.497769"], ["created_at", "2022-11-15 17:47:18.565750"], ["updated_at", "2022-11-15 17:47:18.565750"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "photos" SET "user_id" = ?, "updated_at" = ? WHERE "photos"."id" = ?  [["user_id", 3], ["updated_at", "2022-11-15 17:47:18.573386"], ["id", 4]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/3
+Completed 302 Found in 82ms (ActiveRecord: 4.0ms)
+
+
+Started GET "/users/3" for ::1 at 2022-11-15 19:47:18 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mPhoto Load (0.0ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mTag Load (0.0ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?[0m  [["photo_id", 4]]
+  Rendered users/show.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:47:21 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wIxrThRLl6Mfp86yUMw0X4ZiVLznW2iKjWZRIEbtL2eRI9Sr+E/5ScnULZvn/dHFVYXKTg9nrknd4NUtsoJSaQ==", "tag"=>{"photo_id"=>"4", "user_id"=>"3"}, "commit"=>"Tag User"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)  [["user_id", 3], ["photo_id", 4]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3001/users/3
+Completed 302 Found in 4ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/users/3" for ::1 at 2022-11-15 19:47:21 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mPhoto Load (0.0ms)[0m  [1mSELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?[0m  [["user_id", 3]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mTag Load (0.0ms)[0m  [1mSELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?[0m  [["photo_id", 4]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered users/show.html.haml within layouts/application (2.3ms)
+Completed 200 OK in 11ms (Views: 10.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:47:23 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"B99Kg+dwNuLyT5qmKX5DGFYMR+Ukwb2KQF48eWi2lrBWcPVmC3RYCCQ8eY+eT6aChevZF8z9e0kQ2Lh0nNnrvg==", "tag"=>{"photo_id"=>"4", "user_id"=>"2"}, "commit"=>"Tag User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)[0m  [["user_id", 2], ["photo_id", 4]]
+  [1m[35m (2.4ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/3
+Completed 302 Found in 5ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/users/3" for ::1 at 2022-11-15 19:47:23 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 4]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered users/show.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 10ms (Views: 8.8ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/tags" for ::1 at 2022-11-15 19:47:24 +0200
+Processing by TagsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uInQgrjuHk4n20e4i4P+h8SKggKzQFxdp9/BdmRAYJbpJm9nVOpwpPGopJE8shsdF20c8Ft8mp73WUV7kC8dmA==", "tag"=>{"photo_id"=>"4", "user_id"=>"1"}, "commit"=>"Tag User"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "tags" ("user_id", "photo_id") VALUES (?, ?)[0m  [["user_id", 1], ["photo_id", 4]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3001/users/3
+Completed 302 Found in 4ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/users/3" for ::1 at 2022-11-15 19:47:24 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mPhoto Load (0.0ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 3]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.0ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 4]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mUser Load (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (6.9ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/3/photos/new" for ::1 at 2022-11-15 20:18:11 +0200
+Processing by PhotosController#new as HTML
+  Parameters: {"user_id"=>"3"}
+  [1m[35mUser Load (1.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "photos" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", "2022-11-15 18:18:11.859821"], ["updated_at", "2022-11-15 18:18:11.859821"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+  Rendered photos/new.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 33ms (Views: 16.4ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/log-out" for ::1 at 2022-11-15 20:18:15 +0200
+Processing by SessionsController#destroy as HTML
+Redirected to http://localhost:3001/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2022-11-15 20:18:15 +0200
+Processing by HomeController#index as HTML
+  Rendered home/index.html.haml within layouts/application (3.0ms)
+Completed 200 OK in 26ms (Views: 21.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/log-in" for ::1 at 2022-11-15 20:18:30 +0200
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/log-in" for ::1 at 2022-11-15 20:18:31 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"H4Q18w26DGd9EhWM1HXTXy7DR4fmsZHXa69E9JVg5fNOK4oW4b5ijath9qVjRDbF/STZdQ6NVxQ7KcD5YQ+Y/Q==", "email"=>"test@test.com", "password"=>"[FILTERED]", "commit"=>"Log in"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["email", "test@test.com"]]
+Redirected to http://localhost:3001/users/1
+Completed 302 Found in 51ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for ::1 at 2022-11-15 20:18:31 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mPhoto Load (0.1ms)[0m  SELECT "photos".* FROM "photos" WHERE "photos"."user_id" = ?  [["user_id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" WHERE "tags"."photo_id" = ?  [["photo_id", 2]]
+  [1m[36mUser Load (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered users/show.html.haml within layouts/application (10.9ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 1.1ms)
