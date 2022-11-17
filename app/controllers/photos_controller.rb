@@ -1,13 +1,16 @@
 class PhotosController < ApplicationController
   def create
     @user = User.find(params[:user_id])
-    if params[:photo] == nil
-
+    if params[:photo]["image"] == nil
       flash[:alert] = "Please upload a photo"
       redirect_to :back
     else
-    @photo = Photo.create(photo_params)
+      if params[:photo]["title"] == ""
+        params[:photo]["title"] = "Default title"
+      end
+      @photo = Photo.create(photo_params)
       @photo.user_id = @user.id
+      @photo.title = params[:photo]["title"]
       @photo.save
       flash[:notice] = "Successfully uploaded a photo"
       redirect_to user_path(@user)
@@ -21,6 +24,6 @@ class PhotosController < ApplicationController
 
   private
   def photo_params
-    params.require(:photo).permit(:image)
+    params.require(:photo).permit(:image, :title)
   end
 end

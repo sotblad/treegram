@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'mimemagic', '0.3.0', git: 'https://github.com/mimemagicrb/mimemagic', ref: 'a4b038c6c1b9d76dac33d5711d28aaa9b4c42c66'
 gem 'rails'
 gem 'sqlite3'
 gem 'sass-rails'

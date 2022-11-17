@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150319191254) do
   create_table "photos", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "caption"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
