@@ -24,6 +24,17 @@ class UsersController < ApplicationController
   def show
     @users = User.all
     @user = User.find(params[:id])
+    @links = [@user]
+    Follow.where(follower: params[:id]).each do |follow|
+      @links << User.find(follow[:followee])
+    end
+    @photos = []
+    @links.each do |link|
+      link.photos.each do |photo|
+        @photos << photo
+      end
+    end
+    @photos = @photos.sort.reverse
     @tag = Tag.new
   end
 

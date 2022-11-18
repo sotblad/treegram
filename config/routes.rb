@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get '/' => 'home#index'
   resources :users do
     resources :photos
+    resources :follows do
+      post '/follow' => 'follows#follow'
+      post '/unfollow' => 'follows#unfollow'
+    end
   end
 
   resources :tags, only: [:create, :destroy]

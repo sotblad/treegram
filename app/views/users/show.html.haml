@@ -11,6 +11,7 @@
 %br/
 %br/
 %br/
+= link_to 'Followers', new_user_follow_path(@user), class: ['btn', 'btn-success']
 %br/
 %br/
 %br/
@@ -18,13 +19,15 @@
 %br/
 %br/
 .row
-  - @user.photos.each  do |photo|
+  - @photos.each  do |photo|
     .well.col-sm-4
       = photo.title
+      %br
       = image_tag photo.image.url(:medium)
       = form_for @tag do |f|
         = f.hidden_field :photo_id, value: photo.id
         = f.collection_select :user_id, @users, :id, :email
         = f.submit "Tag User"
+        = photo.created_at
       - photo.tags.each do |tag|
         = tag.user.email
