@@ -1,0 +1,13 @@
+%h1 Follows
+= form_for Follow.new(), class: "form-inline", :url => user_follows_path, :html => {:multipart => true} do |f|
+  %br
+  - User.all.each  do |user|
+    - if user.email != @user.email
+      = "#{user.email} | "
+      = f.hidden_field :follower, value: @user.id
+      = f.hidden_field :followee, value: user.id
+      - if follows(user.id)
+        = link_to "Unfollow", user_follow_unfollow_path(follow_id: user.id), method: :post
+      - else
+        = link_to "Follow", user_follows_path(@user, followee: user.id), method: :post
+      %br
