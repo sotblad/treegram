@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/follow' => 'follows#follow'
       post '/unfollow' => 'follows#unfollow'
     end
+    resources :comments
   end
 
   resources :tags, only: [:create, :destroy]

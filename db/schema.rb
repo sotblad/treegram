@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20150319191254) do
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "photo_id"
+    t.integer "user_id"
+    t.string  "comment"
+  end
+
   create_table "follows", force: :cascade do |t|
     t.integer "follower"
     t.integer "followee"

@@ -11,17 +11,18 @@
 %br/
 %br/
 %br/
+%br/
+%br/
+%br/
 = link_to 'Followers', new_user_follow_path(@user), class: ['btn', 'btn-success']
-%br/
-%br/
-%br/
 %br/
 %br/
 %br/
 .row
   - @photos.each  do |photo|
     .well.col-sm-4
-      = photo.title
+      %b
+        = photo.title
       %br
       = image_tag photo.image.url(:medium)
       = form_for @tag do |f|
@@ -31,3 +32,12 @@
         = photo.created_at
       - photo.tags.each do |tag|
         = tag.user.email
+      %br
+      - @comments.each do |d|
+        - if d.photo_id == photo.id
+          = "#{d.user.email}: #{d.comment}"
+          %br
+      = form_for([@user, @comment]) do |f|
+        = f.hidden_field :photo_id, value: photo.id
+        = f.text_field :comment
+        = f.submit "Comment"

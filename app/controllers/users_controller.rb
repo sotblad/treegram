@@ -36,6 +36,8 @@ class UsersController < ApplicationController
     end
     @photos = @photos.sort.reverse
     @tag = Tag.new
+    @comment = Comment.new
+    @comments = Comment.all
   end
 
   private

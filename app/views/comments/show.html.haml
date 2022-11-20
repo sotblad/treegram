@@ -1,0 +1,7 @@
+%h1 Add a comment
+= form_for Comment.new(), :url => user_comments_path, :html => {:multipart => true} do |form|
+  = form.label :comment
+  = form.text_field :comment
+  = form.hidden_field :photo_id, value: @photo_id
+  %br
+  = form.submit 'Comment'
