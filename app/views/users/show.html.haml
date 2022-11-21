@@ -30,6 +30,7 @@
         = f.collection_select :user_id, @users, :id, :email
         = f.submit "Tag User"
         = photo.created_at
+        = link_to 'Delete', user_photo_path(photo_id: photo.id, user_id: photo.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn', 'btn-danger'], style: 'float: right'
       - photo.tags.each do |tag|
         = tag.user.email
       %br
