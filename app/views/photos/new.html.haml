@@ -1,3 +1,5 @@
+%br
+= button_to "Go Back", '#', :onclick => 'history.back(); return false;'
 %h1 Add a Photo
 = form_for Photo.new(), :url => user_photos_path, :html => {:multipart => true} do |form|
   = form.file_field :image

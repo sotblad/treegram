@@ -7,22 +7,23 @@
     = link_to 'Logout', log_out_path, class: ['btn', 'btn-danger', 'logout_btn']
   .row
     = link_to 'Add Photo', new_user_photo_path(@user), class: ['btn', 'btn-success', 'add_photo_btn']
+  .row
+    = link_to 'Followers', new_user_follow_path(@user), class: ['btn', 'btn-info', 'add_followers_btn']
 %br/
 %br/
 %br/
-%br/
-%br/
-%br/
-%br/
-= link_to 'Followers', new_user_follow_path(@user), class: ['btn', 'btn-success']
 %br/
 %br/
 %br/
 .row
   - @photos.each  do |photo|
-    .well.col-sm-4
+    .well.col-sm-4{ :style => "float: inherit; margin: auto" }
+      - if photo.user.avatar_file_name
+        = image_tag photo.user.avatar.url(:thumb), style: 'border-radius: 100%;width: 42px;height: 42px'
       %b
-        = photo.title
+        = photo.user.email
+      = photo.title
+      %br
       %br
       = image_tag photo.image.url(:medium)
       = form_for @tag do |f|
@@ -30,7 +31,8 @@
         = f.collection_select :user_id, @users, :id, :email
         = f.submit "Tag User"
         = photo.created_at
-        = link_to 'Delete', user_photo_path(photo_id: photo.id, user_id: photo.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn', 'btn-danger'], style: 'float: right'
+        - if @user.id == photo.user_id
+          = link_to 'Delete', user_photo_path(photo_id: photo.id, user_id: photo.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn', 'btn-danger'], style: 'float: right'
       - photo.tags.each do |tag|
         = tag.user.email
       %br
@@ -42,3 +44,4 @@
         = f.hidden_field :photo_id, value: photo.id
         = f.text_field :comment
         = f.submit "Comment"
+    %br
