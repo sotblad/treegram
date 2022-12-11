@@ -15,33 +15,20 @@
 %br/
 %br/
 %br/
-.row
-  - @photos.each  do |photo|
-    .well.col-sm-4{ :style => "float: inherit; margin: auto" }
-      - if photo.user.avatar_file_name
-        = image_tag photo.user.avatar.url(:thumb), style: 'border-radius: 100%;width: 42px;height: 42px'
-      %b
-        = photo.user.email
-      = photo.title
-      %br
-      %br
-      = image_tag photo.image.url(:medium)
-      = form_for @tag do |f|
-        = f.hidden_field :photo_id, value: photo.id
-        = f.collection_select :user_id, @users, :id, :email
-        = f.submit "Tag User"
-        = photo.created_at
-        - if @user.id == photo.user_id
-          = link_to 'Delete', user_photo_path(photo_id: photo.id, user_id: photo.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: ['btn', 'btn-danger'], style: 'float: right'
-      - photo.tags.each do |tag|
-        = tag.user.email
-      %br
-      - @comments.each do |d|
-        - if d.photo_id == photo.id
-          = "#{d.user.email}: #{d.comment}"
-          %br
-      = form_for([@user, @comment]) do |f|
-        = f.hidden_field :photo_id, value: photo.id
-        = f.text_field :comment
-        = f.submit "Comment"
-    %br
+.row{:id => "feed"}
+  - @links.each  do |link|
+    - photos = link.photos.sort.reverse
+    - if link.email == @user.email
+      %h1 My photos
+    - else
+      %h1
+        = "#{link.email}'s photos"
+    .well.col-sm-4{:id => link.id, :style => "float: inherit; margin: auto"}
+      %h1{:id => "caption"}
+        = link.photos[0].title
+      = image_tag link.photos[0].image.url(:medium), :id => "slide"
+      %h2{:id => "caption", :caption => link.photos[0].title, :hidden => ""}
+      #slides
+        - photos.each do |photo|
+          - if photo.image.url != link.photos[0].image.url
+            = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title
