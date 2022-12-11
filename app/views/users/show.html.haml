@@ -18,17 +18,20 @@
 .row{:id => "feed"}
   - @links.each  do |link|
     - photos = link.photos.sort.reverse
-    - if link.email == @user.email
-      %h1 My photos
-    - else
-      %h1
-        = "#{link.email}'s photos"
-    .well.col-sm-4{:id => link.id, :style => "float: inherit; margin: auto"}
-      %h1{:id => "caption"}
-        = link.photos[0].title
-      = image_tag link.photos[0].image.url(:medium), :id => "slide"
-      %h2{:id => "caption", :caption => link.photos[0].title, :hidden => ""}
-      #slides
-        - photos.each do |photo|
-          - if photo.image.url != link.photos[0].image.url
-            = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title
+    - if photos.size != 0
+      - if link.email == @user.email
+        %h1 My photos
+      - else
+        %h1
+          = "#{link.email}'s photos"
+      .well.col-sm-4{:id => link.id, :style => "float: inherit; margin: auto"}
+        %h1{:id => "caption"}
+          = link.photos[link.photos.length-1].title
+        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide"
+        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => ""
+        %h2{:id => "firstcaption", :caption => link.photos[link.photos.length-1].title, :hidden => ""}
+        %h2{:id => "counter", :counter => "-1", :hidden => ""}
+        #slides
+          - photos.each do |photo|
+            - if photo.image.url != link.photos[link.photos.length-1].image.url
+              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title

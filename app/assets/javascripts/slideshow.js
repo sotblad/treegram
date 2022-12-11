@@ -4,35 +4,47 @@ window.onload = function() {
     var usrContent = $('div.well.col-sm-4')
     var firstImg;
     var firstCaption;
+    var uid = -1;
 
     usrContent.hover(function () {
-        var ele = $(this);
+        var image = $(this).find("img#slide")
 
-        var image = ele.find("img#slide")
-        firstImg = image.attr("src");
+        var counter = $(this).find("h2#counter");
+        if(parseInt(counter.attr("counter")) == -1){
+            $(this).find("h2#counter").attr("counter", 0)
+        }
 
-        var caption = ele.find("h1#caption");
-        firstCaption = caption.text();
-        console.log(firstCaption)
+        if(uid != usrContent.attr("id")){
+            uid = -1
+            firstImg = null;
+            firstCaption = null;
+        }
+        if (!firstImg) {
+            firstImg = $(this).find("img#firstimage").attr("src");
+        }
 
-        var slides = ele.find("div#slides").find("img");
+        var caption = $(this).find("h1#caption");
+        if(!firstCaption) {
+            firstCaption = $(this).find("h2#firstcaption").attr("caption");
+        }
 
-        var counter = 0;
+        var slides = $(this).find("div#slides").find("img");
+        var counterPlace = $(this).find("h2#counter");
+        counter = counterPlace.attr("counter");
         theInterval = setInterval(function () {
             image.attr("src", $(slides[counter]).attr("src"));
             caption.text($(slides[counter]).attr("alt"));
 
-            counter += 1;
-            if(counter == slides.length) {
+            counter = parseInt(counter)+1;
+            counterPlace.attr("counter", counter)
+
+            if(counter == slides.length+1) {
                 image.attr("src", firstImg);
                 caption.text(firstCaption);
-                setTimeout(function() {}, 1000);
+
                 counter = 0;
+                counterPlace.attr("counter", counter)
             }
-        }, 1000);
-    }, function () {
-        $(this).find("img#slide").attr("src", firstImg)
-        $(this).find("h1#caption").text(firstCaption)
-        clearInterval(theInterval);
-    })
+        }, 2000);
+    }, function () {clearInterval(theInterval);})
 }
