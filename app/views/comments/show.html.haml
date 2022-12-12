@@ -3,7 +3,7 @@
   - if d.photo_id == @photo.id
     - if d.user.avatar_file_name
       = image_tag d.user.avatar.url(:thumb), style: 'border-radius: 100%;width: 20px;height: 20px'
-      = "#{d.user.email}: #{d.comment}"
+    = "#{d.user.email}: #{d.comment}"
     %br
 = form_for Comment.new(), :url => user_comments_path do |f|
   = f.hidden_field :photo_id, value: @photo.id

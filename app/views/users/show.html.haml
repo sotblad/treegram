@@ -28,10 +28,10 @@
         %h1{:id => "caption"}
           = link.photos[link.photos.length-1].title
         = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide", :href => user_comment_path(@user, link.photos[link.photos.length-1])
-        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => ""
+        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => "", :href => user_comment_path(@user, link.photos[link.photos.length-1])
         %h2{:id => "firstcaption", :caption => link.photos[link.photos.length-1].title, :hidden => ""}
         %h2{:id => "counter", :counter => "-1", :hidden => ""}
         #slides
           - photos.each do |photo|
             - if photo.image.url != link.photos[link.photos.length-1].image.url
-              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title
+              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo)
