@@ -9,6 +9,10 @@ window.onload = function() {
     usrContent.hover(function () {
         var image = $(this).find("img#slide")
 
+        $(this).find("img#slide").click(function() {
+            clearInterval(theInterval);
+        })
+
         var counter = $(this).find("h2#counter");
         if(parseInt(counter.attr("counter")) == -1){
             $(this).find("h2#counter").attr("counter", 0)

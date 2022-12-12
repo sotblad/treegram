@@ -1,7 +1,15 @@
-%h1 Add a comment
-= form_for Comment.new(), :url => user_comments_path, :html => {:multipart => true} do |form|
-  = form.label :comment
-  = form.text_field :comment
-  = form.hidden_field :photo_id, value: @photo_id
-  %br
-  = form.submit 'Comment'
+%h1 Comments
+- @comments.each do |d|
+  - if d.photo_id == @photo.id
+    - if d.user.avatar_file_name
+      = image_tag d.user.avatar.url(:thumb), style: 'border-radius: 100%;width: 20px;height: 20px'
+      = "#{d.user.email}: #{d.comment}"
+    %br
+= form_for Comment.new(), :url => user_comments_path do |f|
+  = f.hidden_field :photo_id, value: @photo.id
+  = f.text_field :comment
+  = f.submit "Comment"
+
+%br
+%button#closeLink
+  Close

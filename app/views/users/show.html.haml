@@ -27,7 +27,7 @@
       .well.col-sm-4{:id => link.id, :style => "float: inherit; margin: auto"}
         %h1{:id => "caption"}
           = link.photos[link.photos.length-1].title
-        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide"
+        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide", :href => user_comment_path(@user, link.photos[link.photos.length-1])
         = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => ""
         %h2{:id => "firstcaption", :caption => link.photos[link.photos.length-1].title, :hidden => ""}
         %h2{:id => "counter", :counter => "-1", :hidden => ""}

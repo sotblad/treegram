@@ -1,5 +1,6 @@
 class CommentsController<ActionController::Base
   def new
+
     redirect_to "/"
   end
 
@@ -10,6 +11,9 @@ class CommentsController<ActionController::Base
   end
 
   def show
+    @photo = Photo.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.all
   end
 
 
