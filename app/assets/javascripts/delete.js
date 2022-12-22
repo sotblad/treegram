@@ -16,6 +16,7 @@ var delPhoto = {
     }
     ,deleteSuccess: function(data, requestStatus, xhrObject) {
         alert("photo deleted successfully")
+        location.reload();
         return(false); // prevent default link action
     }
 };
