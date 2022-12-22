@@ -37,4 +37,7 @@
         #slides
           - photos.each do |photo|
             - if photo.image.url != link.photos[link.photos.length-1].image.url
-              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo), :delhref => user_photo_path(photo_id: photo.id, user_id: photo.user_id)
+              - if photo.user_id == @user.id
+                = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo), :delhref => user_photo_path(photo_id: photo.id, user_id: photo.user_id)
+              - else
+                = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo)
