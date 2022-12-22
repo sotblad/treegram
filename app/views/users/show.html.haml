@@ -31,10 +31,10 @@
           = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide", :href => user_comment_path(@user, link.photos[link.photos.length-1])
         - else
           = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "slide", :href => user_comment_path(@user, link.photos[link.photos.length-1]), :delhref => user_photo_path(photo_id: link.photos[link.photos.length-1].id, user_id: link.photos[link.photos.length-1].user_id)
-        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => "", :href => user_comment_path(@user, link.photos[link.photos.length-1])
+        = image_tag link.photos[link.photos.length-1].image.url(:medium), :id => "firstimage", :hidden => "", :href => user_comment_path(@user, link.photos[link.photos.length-1]), :delhref => user_photo_path(photo_id: link.photos[link.photos.length-1].id, user_id: link.photos[link.photos.length-1].user_id)
         %h2{:id => "firstcaption", :caption => link.photos[link.photos.length-1].title, :hidden => ""}
         %h2{:id => "counter", :counter => "-1", :hidden => ""}
         #slides
           - photos.each do |photo|
             - if photo.image.url != link.photos[link.photos.length-1].image.url
-              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo)
+              = image_tag photo.image.url(:medium), :hidden => 1, :alt => photo.title, :href => user_comment_path(@user, photo), :delhref => user_photo_path(photo_id: photo.id, user_id: photo.user_id)

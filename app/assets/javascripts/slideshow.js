@@ -5,6 +5,7 @@ window.onload = function() {
     var firstImg;
     var firstCaption;
     var firstImgHref;
+    var firstImgDelHref;
     var uid = -1;
 
     usrContent.hover(function () {
@@ -24,6 +25,7 @@ window.onload = function() {
             firstImg = null;
             firstCaption = null;
             firstImgHref = null;
+            firstImgDelHref = null;
         }
         if (!firstImg) {
             firstImg = $(this).find("img#firstimage").attr("src");
@@ -38,12 +40,17 @@ window.onload = function() {
             firstImgHref = $(this).find("img#firstimage").attr("href");
         }
 
+        if (!firstImgDelHref) {
+            firstImgDelHref = $(this).find("img#firstimage").attr("delhref");
+        }
+
         var slides = $(this).find("div#slides").find("img");
         var counterPlace = $(this).find("h2#counter");
         counter = counterPlace.attr("counter");
         theInterval = setInterval(function () {
             image.attr("src", $(slides[counter]).attr("src"));
             image.attr("href", $(slides[counter]).attr("href"));
+            image.attr("delhref", $(slides[counter]).attr("delhref"));
             caption.text($(slides[counter]).attr("alt"));
 
             counter = parseInt(counter)+1;
@@ -52,6 +59,7 @@ window.onload = function() {
             if(counter == slides.length+1) {
                 image.attr("src", firstImg);
                 image.attr("href", firstImgHref);
+                image.attr("delhref", firstImgDelHref);
                 caption.text(firstCaption);
 
                 counter = 0;
